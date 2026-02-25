@@ -47,7 +47,9 @@
             this.tbTestInput = new System.Windows.Forms.RichTextBox();
             this.listBoxIntervals = new System.Windows.Forms.ListBox();
             this._runAtStartupCheckBox = new System.Windows.Forms.CheckBox();
+            this._startAsAdminCheckBox = new System.Windows.Forms.CheckBox();
             this._activateOnLaunchCheckBox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this._minimizeCheckBox = new System.Windows.Forms.CheckBox();
@@ -60,6 +62,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this._exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnRelaunchAsAdmin = new System.Windows.Forms.Button();
             this._statusPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._mainDataGrid)).BeginInit();
             this._dataGridGroupBox.SuspendLayout();
@@ -107,7 +110,7 @@
             // _buttonActivate
             // 
             this._buttonActivate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this._buttonActivate.Location = new System.Drawing.Point(248, 422);
+            this._buttonActivate.Location = new System.Drawing.Point(248, 471);
             this._buttonActivate.Name = "_buttonActivate";
             this._buttonActivate.Size = new System.Drawing.Size(137, 27);
             this._buttonActivate.TabIndex = 2;
@@ -136,7 +139,7 @@
             this._mainDataGrid.MultiSelect = false;
             this._mainDataGrid.Name = "_mainDataGrid";
             this._mainDataGrid.RowHeadersVisible = false;
-            this._mainDataGrid.Size = new System.Drawing.Size(603, 212);
+            this._mainDataGrid.Size = new System.Drawing.Size(603, 239);
             this._mainDataGrid.TabIndex = 3;
             this._mainDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.DataSortCompare);
             // 
@@ -166,9 +169,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._dataGridGroupBox.Controls.Add(this._mainDataGrid);
-            this._dataGridGroupBox.Location = new System.Drawing.Point(12, 179);
+            this._dataGridGroupBox.Location = new System.Drawing.Point(12, 201);
             this._dataGridGroupBox.Name = "_dataGridGroupBox";
-            this._dataGridGroupBox.Size = new System.Drawing.Size(615, 237);
+            this._dataGridGroupBox.Size = new System.Drawing.Size(615, 264);
             this._dataGridGroupBox.TabIndex = 4;
             this._dataGridGroupBox.TabStop = false;
             this._dataGridGroupBox.Text = "Key Statistics";
@@ -183,7 +186,9 @@
             this.groupBox1.Controls.Add(this.tbTestInput);
             this.groupBox1.Controls.Add(this.listBoxIntervals);
             this.groupBox1.Controls.Add(this._runAtStartupCheckBox);
+            this.groupBox1.Controls.Add(this._startAsAdminCheckBox);
             this.groupBox1.Controls.Add(this._activateOnLaunchCheckBox);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this._minimizeCheckBox);
@@ -192,7 +197,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 48);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(615, 125);
+            this.groupBox1.Size = new System.Drawing.Size(615, 137);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -233,7 +238,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbTestInput.Location = new System.Drawing.Point(206, 54);
             this.tbTestInput.Name = "tbTestInput";
-            this.tbTestInput.Size = new System.Drawing.Size(326, 66);
+            this.tbTestInput.Size = new System.Drawing.Size(326, 78);
             this.tbTestInput.TabIndex = 11;
             this.tbTestInput.Text = "";
             // 
@@ -244,7 +249,7 @@
             this.listBoxIntervals.FormattingEnabled = true;
             this.listBoxIntervals.Location = new System.Drawing.Point(537, 51);
             this.listBoxIntervals.Name = "listBoxIntervals";
-            this.listBoxIntervals.Size = new System.Drawing.Size(72, 69);
+            this.listBoxIntervals.Size = new System.Drawing.Size(72, 82);
             this.listBoxIntervals.TabIndex = 10;
             // 
             // _runAtStartupCheckBox
@@ -258,6 +263,17 @@
             this._runAtStartupCheckBox.UseVisualStyleBackColor = true;
             this._runAtStartupCheckBox.CheckedChanged += new System.EventHandler(this.OnRunAtStartupCheckBoxChanged);
             // 
+            // _startAsAdminCheckBox
+            // 
+            this._startAsAdminCheckBox.AutoSize = true;
+            this._startAsAdminCheckBox.Location = new System.Drawing.Point(112, 116);
+            this._startAsAdminCheckBox.Name = "_startAsAdminCheckBox";
+            this._startAsAdminCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this._startAsAdminCheckBox.Size = new System.Drawing.Size(15, 14);
+            this._startAsAdminCheckBox.TabIndex = 15;
+            this._startAsAdminCheckBox.UseVisualStyleBackColor = true;
+            this._startAsAdminCheckBox.CheckedChanged += new System.EventHandler(this.OnStartAsAdminCheckBoxChanged);
+            // 
             // _activateOnLaunchCheckBox
             // 
             this._activateOnLaunchCheckBox.AutoSize = true;
@@ -269,6 +285,15 @@
             this._activateOnLaunchCheckBox.TabStop = false;
             this._activateOnLaunchCheckBox.UseVisualStyleBackColor = true;
             this._activateOnLaunchCheckBox.CheckedChanged += new System.EventHandler(this.OnActivateOnLaunchCheckBox);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 116);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(75, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Start as Admin";
             // 
             // label4
             // 
@@ -370,7 +395,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReset.Location = new System.Drawing.Point(19, 422);
+            this.btnReset.Location = new System.Drawing.Point(19, 471);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(147, 27);
             this.btnReset.TabIndex = 6;
@@ -379,11 +404,24 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.OnResetDiagnosticsClick);
             // 
+            // btnRelaunchAsAdmin
+            // 
+            this.btnRelaunchAsAdmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRelaunchAsAdmin.Location = new System.Drawing.Point(472, 471);
+            this.btnRelaunchAsAdmin.Name = "btnRelaunchAsAdmin";
+            this.btnRelaunchAsAdmin.Size = new System.Drawing.Size(155, 27);
+            this.btnRelaunchAsAdmin.TabIndex = 7;
+            this.btnRelaunchAsAdmin.TabStop = false;
+            this.btnRelaunchAsAdmin.Text = "Relaunch as Admin";
+            this.btnRelaunchAsAdmin.UseVisualStyleBackColor = true;
+            this.btnRelaunchAsAdmin.Click += new System.EventHandler(this.OnRelaunchAsAdminClick);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 461);
+            this.ClientSize = new System.Drawing.Size(639, 510);
+            this.Controls.Add(this.btnRelaunchAsAdmin);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this._dataGridGroupBox);
@@ -431,6 +469,8 @@
         private System.Windows.Forms.CheckBox _activateOnLaunchCheckBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox _runAtStartupCheckBox;
+        private System.Windows.Forms.CheckBox _startAsAdminCheckBox;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label labelTypingSpeed;
         private System.Windows.Forms.RichTextBox tbTestInput;
         private System.Windows.Forms.ListBox listBoxIntervals;
@@ -438,6 +478,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnRelaunchAsAdmin;
     }
 }
 

@@ -58,5 +58,17 @@ namespace KeyboardUnchatter.Properties {
                 this["activateOnLaunch"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool startAsAdmin {
+            get {
+                return ((bool)(this["startAsAdmin"]));
+            }
+            set {
+                this["startAsAdmin"] = value;
+            }
+        }
     }
 }

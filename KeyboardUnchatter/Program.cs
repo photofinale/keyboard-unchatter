@@ -4,6 +4,8 @@ using System.Windows;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Security.Principal;
 using Microsoft.Win32;
 
 namespace KeyboardUnchatter
@@ -30,6 +32,7 @@ namespace KeyboardUnchatter
         [STAThread]
         static void Main()
         {
+            RelaunchAsAdminIfNeeded();
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.AboveNormal;
 
             Application.EnableVisualStyles();
@@ -57,6 +60,54 @@ namespace KeyboardUnchatter
                 }
 
                 Application.Run();
+            }
+        }
+
+        public static bool IsRunningAsAdmin()
+        {
+            using (var identity = WindowsIdentity.GetCurrent())
+            {
+                if (identity == null)
+                {
+                    return false;
+                }
+
+                var principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+
+        private static void RelaunchAsAdminIfNeeded()
+        {
+            if (!Properties.Settings.Default.startAsAdmin)
+            {
+                return;
+            }
+
+            RelaunchAsAdmin();
+        }
+
+        public static void RelaunchAsAdmin()
+        {
+            if (IsRunningAsAdmin())
+            {
+                return;
+            }
+
+            try
+            {
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = Application.ExecutablePath,
+                    UseShellExecute = true,
+                    Verb = "runas"
+                };
+
+                Process.Start(startInfo);
+                Environment.Exit(0);
+            }
+            catch (Win32Exception ex) when (ex.NativeErrorCode == 1223)
+            {
             }
         }
 
