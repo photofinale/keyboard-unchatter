@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Security.Principal;
+using System.Threading;
 using Microsoft.Win32;
 
 namespace KeyboardUnchatter
@@ -15,6 +16,7 @@ namespace KeyboardUnchatter
         private static InputHook _inputHook;
         private static KeyboardMonitor _keyboardMonitor;
         private static MainWindow _mainWindow;
+        private static Mutex _singleInstanceMutex;
 
         #region Get/Set
         public static InputHook InputHook
@@ -33,6 +35,12 @@ namespace KeyboardUnchatter
         static void Main()
         {
             RelaunchAsAdminIfNeeded();
+
+            if (!EnsureSingleInstance())
+            {
+                return;
+            }
+
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.AboveNormal;
 
             Application.EnableVisualStyles();
@@ -61,6 +69,16 @@ namespace KeyboardUnchatter
 
                 Application.Run();
             }
+
+            _singleInstanceMutex?.ReleaseMutex();
+            _singleInstanceMutex?.Dispose();
+        }
+
+        private static bool EnsureSingleInstance()
+        {
+            bool createdNew;
+            _singleInstanceMutex = new Mutex(true, @"Local\KeyboardUnchatter", out createdNew);
+            return createdNew;
         }
 
         public static bool IsRunningAsAdmin()
