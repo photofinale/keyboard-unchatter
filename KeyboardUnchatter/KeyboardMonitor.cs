@@ -58,6 +58,11 @@ namespace KeyboardUnchatter
             {
                 return true;
             }
+
+            if (IsModifierKey(keyPress.Key))
+            {
+                return true;
+            }
             
             var key = _keyStatusList.GetKey(keyPress.KeyCode);
 
@@ -104,6 +109,27 @@ namespace KeyboardUnchatter
             }
 
             return true;
+        }
+
+        private static bool IsModifierKey(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.ShiftKey:
+                case Keys.LShiftKey:
+                case Keys.RShiftKey:
+                case Keys.ControlKey:
+                case Keys.LControlKey:
+                case Keys.RControlKey:
+                case Keys.Menu:
+                case Keys.LMenu:
+                case Keys.RMenu:
+                case Keys.LWin:
+                case Keys.RWin:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         private void RegisterPress(Keys key)
